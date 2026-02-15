@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Quintessential&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>C.O.V.A.L — Portfolio</title>
+  <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:      #0a0a0a;
+      --surface: #111111;
+      --border:  #1e1e1e;
+      --text:    #e8e8e8;
+      --muted:   #888;
+      --cyan:    #00ffff;
+      --magenta: #ff00ff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .mainfont { font-family: 'Quintessential', serif; }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-img {
+      height: 52px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-right a {
+      text-decoration: none;
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-right a:hover { background: var(--cyan); color: #000; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 100px 60px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: 'Quintessential', serif;
+      font-size: clamp(56px, 11vw, 108px);
+      line-height: 1;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .hero-sub {
+      font-size: 12px;
+      letter-spacing: 5px;
+      color: var(--magenta);
+      font-weight: 400;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .hero p {
+      max-width: 560px;
+      margin: 0 auto;
+      font-size: 17px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ── PROJECTS ── */
+    section { padding: 80px 60px; }
+
+    .section-header { margin-bottom: 56px; }
+
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Quintessential', serif;
+      font-size: 40px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .slash-prefix { color: var(--text); margin-right: 10px; }
+
+    /* ── PROJECT CARD ── */
+    .project-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid var(--border);
+      margin-bottom: 1px;
+      transition: border-color 0.2s;
+      overflow: hidden;
+    }
+    .project-card:hover { border-color: rgba(0,255,255,0.3); }
+
+    .project-preview {
+      width: 100%;
+      height: 400px;
+      position: relative;
+      background: var(--surface);
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-preview iframe {
+      width: 200%;
+      height: 200%;
+      transform: scale(0.5);
+      transform-origin: top left;
+      border: none;
+      pointer-events: none;
+    }
+
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      background: rgba(0,255,255,0.05);
+      transition: opacity 0.2s;
+    }
+    .project-card:hover .preview-overlay { opacity: 1; }
+    .preview-overlay span {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid var(--cyan);
+      padding: 10px 24px;
+      background: rgba(0,0,0,0.6);
+    }
+
+    .project-info {
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background: var(--bg);
+      transition: background 0.2s;
+    }
+    .project-card:hover .project-info { background: var(--surface); }
+
+    .project-meta { flex: 1; }
+
+    .project-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      transition: color 0.2s;
+    }
+    .project-card:hover .project-num { color: var(--magenta); }
+
+    .project-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid rgba(0,255,255,0.25);
+      padding: 2px 10px;
+      margin-bottom: 10px;
+    }
+
+    .project-meta h3 {
+      font-family: 'Quintessential', serif;
+      font-size: 26px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .project-meta p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    .project-cta {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+    .project-card:hover .project-cta { color: var(--cyan); }
+    .project-cta::after { content: '→'; transition: transform 0.2s; }
+    .project-card:hover .project-cta::after { transform: translateX(4px); }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--surface);
+      padding: 80px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cta-band h2 {
+      font-family: 'Quintessential', serif;
+      font-size: clamp(26px, 4vw, 42px);
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    .cta-band p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .cta-band-btn {
+      display: inline-block;
+      text-decoration: none;
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .cta-band-btn:hover {
+      background: var(--cyan);
+      color: #000;
+      box-shadow: 0 0 24px rgba(0,255,255,0.3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-left { font-size: 13px; color: var(--muted); }
+    .footer-left a { color: var(--cyan); text-decoration: none; }
+
+    .footer-right {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      nav, .hero, section, .cta-band, footer { padding-left: 24px; padding-right: 24px; }
+      .cta-band { flex-direction: column; align-items: flex-start; }
+      .project-info { flex-direction: column; align-items: flex-start; }
+      .project-preview { height: 260px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <img class="logo-img" src="https://coval.netlify.app/IMG/logo.png" alt="C.O.V.A.L Logo">
+    <div class="nav-right">
+      <a href="https://coval.netlify.app/" target="_blank">Visit My Company</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-tag">Zain Nasir</span>
+    <h1 class="mainfont">K.O.V.A.L</h1>
+    <p class="hero-sub">
+      Kreating &nbsp;Opportunities &nbsp;Visions &nbsp;And &nbsp;Legacies
+    </p>
+    <p>
+      I help small businesses get beautiful, functional websites at a price that makes sense —
+      clean code, modern design, tailored to your brand.
+    </p>
+  </div>
+
+  <!-- PROJECTS -->
+  <section>
+    <div class="section-header">
+      <p class="section-eyebrow">My Work</p>
+      <h2 class="section-title"><span class="slash-prefix">/ /</span> Latest Projects</h2>
+    </div>
+
+    <!-- PROJECT 1: OliveCare -->
+    <a class="project-card" href="https://olivecare.net/" target="_blank" rel="noopener">
+      <div class="project-preview">
+        <iframe src="https://olivecare.net/" title="OliveCare" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe>
+        <div class="preview-overlay"><span>Visit Live Site</span></div>
+      </div>
+      <div class="project-info">
+        <div class="project-meta">
+          <div class="project-num">01 — Charity</div>
+          <span class="project-label">Non-Profit</span>
+          <h3>OliveCare</h3>
+          <p>A 501(c)(3) charity building a safe, nurturing home for orphans in Bangladesh — designed by an internationally acclaimed sustainable architecture firm.</p>
+        </div>
+        <span class="project-cta">Visit Live Site</span>
+      </div>
+    </a>
+
+    <!-- PROJECT 2: SEED -->
+    <a class="project-card" href="https://seedforthefuture.org/" target="_blank" rel="noopener">
+      <div class="project-preview">
+        <iframe src="https://seedforthefuture.org/" title="SEED" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe>
+        <div class="preview-overlay"><span>Visit Live Site</span></div>
+      </div>
+      <div class="project-info">
+        <div class="project-meta">
+          <div class="project-num">02 — Non-Profit</div>
+          <span class="project-label">Environment</span>
+          <h3>SEED</h3>
+          <p>Sustainability, Education, and Environmental Development — empowering communities through eco initiatives, youth education programs, and student ambassador networks.</p>
+        </div>
+        <span class="project-cta">Visit Live Site</span>
+      </div>
+    </a>
+
+    <!-- PROJECT 3: torcurry -->
+    <a class="project-card" href="https://torcurry.netlify.app/" target="_blank" rel="noopener">
+      <div class="project-preview">
+        <iframe src="https://torcurry.netlify.app/" title="torcurry" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe>
+        <div class="preview-overlay"><span>Visit Live Site</span></div>
+      </div>
+      <div class="project-info">
+        <div class="project-meta">
+          <div class="project-num">03 — Food Blog</div>
+          <span class="project-label">Food</span>
+          <h3>torcurry</h3>
+          <p>A personal fusion food blog offering practical recipes and a deeper dive into cooking techniques and ideas.</p>
+        </div>
+        <span class="project-cta">Visit Live Site</span>
+      </div>
+    </a>
+
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <div>
+      <h2>Ready to Build Something Amazing?</h2>
+      <p>Let's discuss your project and see how I can help bring your vision to life. Direct access, no middlemen, competitive pricing.</p>
+    </div>
+    <a href="https://coval.netlify.app/html/contact" class="cta-band-btn" target="_blank">Get Started Today</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      &copy; 2025 <a href="https://coval.netlify.app/" target="_blank">K.O.V.A.L</a>. All rights reserved.
+    </div>
+    <div class="footer-right">Kreating Opportunities Visions And Legacies</div>
+  </footer>
+
+</body>
+</html>
